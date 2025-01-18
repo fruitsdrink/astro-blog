@@ -1,0 +1,35 @@
+---
+import { GithubItem } from "@/components";
+import { MainLayout } from "@/layouts";
+import { formatNumber } from "@/lib/utils";
+import { githubItems } from "@/data";
+---
+
+<MainLayout>
+  <div class="grid grid-cols-2 gap-8">
+    {
+      githubItems.map(async (item) => {
+        const res = await fetch(
+          `https://api.github.com/repos/${item.fullname}`,
+          {
+            headers: {
+              Authorization: `Bearer ${import.meta.env.GITHUB_TOKEN}`,
+            },
+          }
+        );
+        const data = (await res.json()) as GitHub;
+
+        const starCount = formatNumber(data.stargazers_count) ?? 0;
+
+        return (
+          <GithubItem
+            item={{
+              ...item,
+              starCount,
+            }}
+          />
+        );
+      })
+    }
+  </div>
+</MainLayout>

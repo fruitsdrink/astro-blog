@@ -1,0 +1,34 @@
+---
+import MainHead from "./MainHead.astro";
+// Supports weights 100-900
+import "@fontsource-variable/noto-sans-sc";
+
+import "@/styles/global.scss";
+import { Footer, Header } from "@/components";
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <MainHead />
+  <body class="min-h-screen grid grid-rows-[1fr_auto] bg-zinc-50">
+    <Header />
+    <main class="mt-[100px] container">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script>
+  const header = document.getElementById("header");
+
+  window.addEventListener("scroll", function (ev) {
+    const top = this.document.documentElement.scrollTop;
+    const headerTop = header?.offsetTop ?? 0;
+    if (top > headerTop) {
+      header!.classList.add("opacity-90");
+    } else {
+      header!.classList.remove("opacity-90");
+    }
+  });
+</script>

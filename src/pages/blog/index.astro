@@ -1,0 +1,54 @@
+---
+import { MainLayout } from "@/layouts";
+import { Image } from "astro:assets";
+
+const blogItems = [
+  {
+    title: "zyyo的博客",
+    site: "https://zyyo.cc",
+    description: "个人博客",
+    image: import("@/assets/images/blog/zyyo.cc.png"),
+  },
+  {
+    title: "YIKE时光",
+    site: "https://huohuo90.com/home",
+    description: "个人博客",
+    image: import("@/assets/images/blog/huohuo90.com.png"),
+  },
+  {
+    title: "YYF的博客",
+    site: "https://yanyunfeng.com/",
+    description: "个人博客",
+    image: import("@/assets/images/blog/yanyunfeng.com.png"),
+  },
+];
+---
+
+<MainLayout>
+  <main class="flex flex-row flex-wrap gap-4">
+    {
+      blogItems.map((blog) => {
+        return (
+          <div class="w-[400px] aspect-[16/9] border border-dashed relative p-2 rounded">
+            <Image
+              src={blog.image}
+              alt={blog.title}
+              class="w-full h-full object-cover object-top"
+            />
+            <div class="bg-black/70 absolute bottom-2 left-2 right-2 px-2 py-1 text-white text-sm flex items-center">
+              <h2 class="w-full">
+                <a
+                  href={blog.site}
+                  target="_blank"
+                  class="hover:text-white hover:font-bold text-xs tracking-widest"
+                >
+                  {blog.title}
+                </a>
+              </h2>
+            </div>
+          </div>
+        );
+      })
+    }
+  </main>
+</MainLayout>

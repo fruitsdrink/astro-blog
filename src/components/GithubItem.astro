@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  item: {
+    title: string;
+    description: string;
+    github: string;
+    site?: string;
+    demo?: string;
+    starCount?: string;
+    tags?: string[];
+    banner?: ReturnType<typeof import("astro:assets").Image>;
+  };
+}
+
+const { item } = Astro.props;
+---
+
+<div
+  class="border p-8 rounded border-dashed grid grid-rows-[auto_1fr_auto] gap-2"
+>
+  <!-- banner image -->
+  {
+    item.banner && (
+      <Image
+        src={item.banner}
+        alt={item.title}
+        class="w-full aspect-[16/9] object-contain"
+      />
+    )
+  }
+
+  <!-- header -->
+  <div class="flex flex-row items-center justify-between">
+    <h2 class="font-semibold flex-1">
+      <a href={item.github} target="_blank">
+        {item.title}
+      </a>
+    </h2>
+
+    <div class="flex gap-2 items-center">
+      {
+        item.starCount && (
+          <div class="flex items-center opacity-80">
+            <Icon name="mdi:star" size={16} />
+            <span class="text-sm">{item.starCount}</span>
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- content -->
+  <div>{item.description}</div>
+  <!-- footer -->
+  <div class="flex items-center gap-1 justify-between">
+    {
+      item.tags && item.tags.length && (
+        <div class="flex gap-1 items-center">
+          {item.tags.map((tag) => (
+            <span class="bg-gray-200 rounded-md px-2 py-0.5 text-xs text-gray-600">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )
+    }
+    <div class="flex gap-2 items-center">
+      <a href={item.github} target="_blank"
+        ><Icon name="mdi:github" size={18} /></a
+      >
+      {
+        item.site && (
+          <a href={item.site} target="_blank">
+            <Icon name={"mdi:web"} size={18} />
+          </a>
+        )
+      }
+      {
+        item.demo && (
+          <a href={item.demo} target="_blank">
+            <Icon name={"mdi:blog"} size={18} />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

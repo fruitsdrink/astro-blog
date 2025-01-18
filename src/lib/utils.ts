@@ -21,3 +21,14 @@ export function formatDate(date: Date | string) {
     timeZone: "UTC",
   });
 }
+
+export const formatNumber = (num: number) => {
+  if (!num) return "";
+  if (isNaN(num)) return "";
+  // return 1.2k
+  if (num < 1000) {
+    return num.toString();
+  } else {
+    return (num / 1000).toFixed(1) + "k";
+  }
+};

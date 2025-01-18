@@ -1,0 +1,45 @@
+---
+import { Icon } from "astro-icon/components";
+
+const menus = [
+  {
+    name: "首页",
+    href: "/",
+    icon: "mdi:home",
+  },
+  {
+    name: "博客",
+    href: "/blog",
+    icon: "mdi:blog",
+  },
+  {
+    name: "开源项目",
+    href: "/github",
+    icon: "mdi:github",
+  },
+];
+---
+
+<header
+  id="header"
+  class="bg-white/90 grid grid-cols-[auto_1fr] p-4 fixed top-0 w-full h-[60px] items-center z-10 border-b-[1px] border-b-[#eee] transition-opacity duration-500 ease-in-out"
+>
+  <a href="/">
+    <div class="font-semibold">水果 🥤 饮料</div>
+  </a>
+  <nav class="flex justify-end gap-4">
+    {
+      menus.map((menu) => {
+        return (
+          <a
+            href={menu.href}
+            class="hover:text-blue-500 transition-colors flex items-center gap-0"
+          >
+            <Icon name={menu.icon} size={18} />
+            {menu.name}
+          </a>
+        );
+      })
+    }
+  </nav>
+</header>
