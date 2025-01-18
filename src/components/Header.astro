@@ -1,6 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
 
+interface Props {
+  title?: string;
+  description?: string;
+}
+
 const menus = [
   {
     name: "首页",
@@ -8,7 +13,7 @@ const menus = [
     icon: "mdi:home",
   },
   {
-    name: "博客",
+    name: "博客分享",
     href: "/blog",
     icon: "mdi:blog",
   },

@@ -1,5 +1,10 @@
 ---
-
+interface Props {
+  title?: string;
+  description?: string;
+}
+const defaultTitle = "水果🥤饮料";
+const { title, description = "水果饮料的博客" } = Astro.props as Props;
 ---
 
 <head>
@@ -7,5 +12,6 @@
   <meta name="viewport" content="width=device-width" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="generator" content={Astro.generator} />
-  <title>水果🥤</title>
+  <meta name="description" content={description} />
+  <title>{title ? `${title} | ${defaultTitle}` : `${defaultTitle}`}</title>
 </head>
